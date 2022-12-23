@@ -16,153 +16,89 @@ return `
                 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
     }
     
-    .flex-container {
-        display: flex;
-    }
-    
-    .flex-child {
-        flex: 1;
-    }
-    
-    .flex-child:first-child {
-        margin-right: 20px;
-    }
-    
     </style>
 </head>
 <body>
     <div>
-        <div class="flex-container">
-            <div class="flex-child">
-                <div>
-                    <label>Dr.</label>
-                    <label>${patient.name.firstName}</label>
-                </div>
-                <div>
-                    <label>Mobile No.</label>
-                    <label>doctormobile</label>
-                </div>
-            </div>
-            <div class="flex-child">
-                <div>
-                    <label>hospital name</label>
-                </div>
-                <div>
-                    <label>hospital address</label>
-                </div>
-                <div>
-                    <label>Phone no.</label>
-                    <label>hospital mobile</label>
-                </div>
-            </div>
-        </div>
-        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-        <div class="flex-container">
-            <div class="flex-child">
-                <div>
-                    <label>Health ID : </label>
-                    <label>healthID</label>
-                </div>
-                <div>
-                    <label>Patient Name : </label>
-                    <label>patient name</label>
-                </div>
-                <div>
-                    <label>Address: </label>
-                    <label>patient address</label>
-                </div>
-            </div>
-            <div class="flex-child">
-                <div>
-                    <label>Date : </label>
-                    <label>date</label>
-                </div>
-            </div>
-        </div>
-        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-        <div class="flex-container">
-            <div class="flex-child">
-                <div>
-                    <label>Chief complaints</label>
-                </div>
-                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-                <div>
-                    <label>complaint(days)</label>
-                </div>
-            </div>
-            <div class="flex-child">
-                <div>
-                    <label>Clinincal findings</label>
-                </div>
-                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-                <div>
-                    <label>complaint finding</label>
-                </div>
-            </div>
-        </div>
-        <br>
-        <hr style="width:80%">
         <div>
-            <h4>Notes</h4>
-            <p>prescription notes</p>
-        </div>
-        <div>
-            <h4>Diagnosis</h4>
-            <p>prescription diagnosis</p>
-        </div>
-        <div>
-            <h4>Procedure Conducted</h4>
-            <p>procedureConducted</p>
-        </div>
-        <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-        <div class="flex-container">
-            <div class="flex-child">
+            <div>
+                <h1>Patient Details</h1>
+            </div>
+            <div>
+                <label><strong>Health ID : </strong></label>
+                <label>${patient.healthID}</label>
+            </div>
+            <br>
+            <div>
+                <label><strong>Patient Name : </strong></label>
+                <label>${patient.name.firstName} ${patient.name.surName}</label>
+            </div>
+            <br>
+            <div>
+                <label><strong>DOB : </strong></label>
+                <label>${patient.dob}</label>
+            </div>
+            <br>
+            <div>
+                <label><strong>Mobile No. </strong></label>
+                <label>${patient.mobile}</label>
+            </div>
+            <br>
+            <div>
+                <label><strong>Blood Group : </strong></label>
+                <label>${patient.bloodGroup}</label>
+            </div>
+            <br>
+            <div>
+                <label><strong>Email : </strong></label>
+                <label>${patient.email}</label>
+            </div>
+            <br>
+            <div>
+                <label><strong>Address: </strong></label>
+                <label>${patient.address.building}, ${patient.address.city}, ${patient.address.state}, ${patient.address.pincode}</label>
+            </div>
+            <br>
+            <div>
+                <h2>Disease : </h2>
                 <div>
-                    <label>Medicine Name</label>
-                </div>
-                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
-                <div>
-                    <label>medicineName</label>
+                    <label>${patient.diseases[0].disease}</label>
+                    <label>(${patient.diseases[0].yrs} yrs)</label>
                 </div>
             </div>
-            <div class="flex-child">
+            <div>
+                <h2>Contact Person : </h2>
+            </div>
+            <div>
                 <div>
-                    <label>Dosages & Duration</label>
+                    <label><strong>Name : </strong></label>
+                    <label>${patient.contactPerson.name.firstName}</label>
+                    <label>${patient.contactPerson.name.surName}</label>
                 </div>
-                <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                <br>
                 <div>
-                    <div>
-                        <label>morning :</label>
-                        <label>morning quantity (remark)</label>
-                    </div>
-                    <div>
-                        <label>afternoon :</label>
-                        <label>afternoon quantity (remark)</label>
-                    </div>
-                    <div>
-                        <label>night :</label>
-                        <label>evening quantity (remark)</label>
-                    </div>
-                    <div>
-                        <label>days :</label>
-                        <label>duration</label>
-                    </div>
-                    <div>
-                        <label>Total Tab. :</label>
-                        <label>medicine total</label>
-                    </div>
+                    <label><strong>Mobile No. </strong></label>
+                    <label>${patient.contactPerson.mobile}</label>
+                </div>
+                <br>
+                <div>
+                    <label><strong>Email : </strong></label>
+                    <label>${patient.contactPerson.email}</label>
+                </div>
+                <br>
+                <div>
+                    <label><strong>Relation : </strong></label>
+                    <label>${patient.contactPerson.relation}</label>
+                </div>
+                <br>
+                <div>
+                    <label><strong>Address: </strong></label>
+                    <label>${patient.contactPerson.address.building},
+                        ${patient.contactPerson.address.city},
+                        ${patient.contactPerson.address.state},
+                        ${patient.contactPerson.address.pincode}</label>
                 </div>
             </div>
-        </div>
-        <br>
-        <hr style="width:80%">
-        <div>
-            <h4>Insvestigations</h4>
-            <p>investigation</p>
-        </div>
-        <div>
-            <h4>Advices</h4>
-            <p>advice</p>
         </div>
     </div>
 </body>
