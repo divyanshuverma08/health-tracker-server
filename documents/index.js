@@ -13,6 +13,14 @@ return `
         margin: 25px;
         padding: 25px;
     }
+    .btn {
+    height: fit-content;
+    padding: 10px;
+    background-color:#0a0a23;
+    color: #fff;
+    border:none;
+    border-radius:10px;
+  }
     
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
@@ -20,9 +28,9 @@ return `
 <body>
     <div id="data">
         <div>
-            <div style="display:flex; flex-direction:row align-items: center; justify-content: space-between;">
+            <div style="display:flex; flex-direction:row; align-items: center; justify-content: space-between;">
                 <h1>Patient Details</h1>
-                <button id="download"> Click to download</button>
+                <button class="btn" id="download"> Click to download</button>
             </div>
             <div>
                 <label><strong>Health ID : </strong></label>
