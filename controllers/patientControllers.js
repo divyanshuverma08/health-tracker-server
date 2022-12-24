@@ -1,5 +1,9 @@
 const Patient = require("../models/patient");
 const pdf = require('html-pdf');
+const util = require('util'),
+    request = util.promisify(require('request')),
+    fs = require('fs'),
+    fsp = fs.promises;
 
 const pdfTemplate = require('../documents');
 
@@ -21,12 +25,23 @@ module.exports.get_patient = async (req, res) => {
 };
 
 module.exports.info_patient = async (req, res) => {
-  const email = "ram.singh@gmail.com";
-  const patient = await Patient.findOne({ email });
+  const id = req.params.id;
+  const patient = await Patient.findOne({ healthID : id });
   pdf.create(pdfTemplate(patient), {}).toFile(`${__basedir}/documents/${patient.healthID}info.pdf`, (err) => {
     if(err) {
         res.send(Promise.reject());
     }
-    res.status(200).sendFile(`${__basedir}/documents/${patient.healthID}info.pdf`)
+    // res.status(200).sendFile(`${__basedir}/documents/${patient.healthID}info.pdf`)
+    var stream = fs.createReadStream(`${__basedir}/documents/${patient.healthID}info.pdf`);
+    var filename = `${patient.healthID}info.pdf`; 
+    // Be careful of special characters
+  
+    filename = encodeURIComponent(filename);
+    // Ideally this should strip them
+  
+    res.setHeader('Content-disposition', 'inline; filename="' + filename + '"');
+    res.setHeader('Content-type', 'application/pdf');
+  
+    stream.pipe(res)
   });
 };

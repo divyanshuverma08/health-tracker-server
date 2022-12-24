@@ -60,7 +60,7 @@ mongoose
     });
   });
 
-app.get("/", (req, res) => res.send("server listening at 5000 port!"));
+app.get("/", (req, res) => res.send(`server listening at ${port} port!`));
 app.use(authRoutes);
 app.use(registerRoute);
 app.use(doctorRoute);
