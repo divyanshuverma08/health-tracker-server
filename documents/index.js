@@ -15,13 +15,14 @@ return `
     }
     
     </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 </head>
 <body>
-    <div>
+    <div id="data">
         <div>
             <div style="display:flex; flex-direction:row align-items: center; justify-content: space-between;">
                 <h1>Patient Details</h1>
-                <a href="https://health-tracker-1a68.onrender.com/patient/pdf/${patient.healthID}">Click To Download</a>
+                <button id="download"> Click to download</button>
             </div>
             <div>
                 <label><strong>Health ID : </strong></label>
@@ -100,6 +101,19 @@ return `
             </div>
         </div>
     </div>
+    <script>
+    document.getElementById("download").addEventListener("click", () => {
+          const data = this.document.getElementById("data");
+          var opt = {
+              margin: 1,
+              filename: '${patient.healthID}.pdf',
+              image: { type: 'jpeg', quality: 0.98 },
+              html2canvas: { scale: 2 },
+              jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+          };
+          html2pdf().from(data).set(opt).save();
+      })
+  </script>
 </body>
 </html>
     `;
