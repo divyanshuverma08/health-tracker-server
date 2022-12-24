@@ -10,10 +10,8 @@ return `
     <title>Document</title>
     <style>
     body{
-        margin: 20px;
-        padding: 20px;
-        box-shadow: inset 0 -3em 3em rgba(0, 0, 0, 0.1), 0 0 0 2px rgb(255, 255, 255),
-                0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+        margin: 25px;
+        padding: 25px;
     }
     
     </style>
@@ -21,8 +19,9 @@ return `
 <body>
     <div>
         <div>
-            <div>
+            <div style="display:flex; flex-direction:row align-items: center; justify-content: space-between;">
                 <h1>Patient Details</h1>
+                <a href="https://health-tracker-1a68.onrender.com/patient/pdf/${patient.healthID}">Click To Download</a>
             </div>
             <div>
                 <label><strong>Health ID : </strong></label>

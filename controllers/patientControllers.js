@@ -1,5 +1,11 @@
 const Patient = require("../models/patient");
+const pdf = require('html-pdf');
+const util = require('util'),
+    request = util.promisify(require('request')),
+    fs = require('fs'),
+    fsp = fs.promises;
 const htmlFile = require("../documents/index");
+const pdfTemplate = require('../documents');
 
 module.exports.preview_prescription = async (req, res) => {
   const id = req.params.id;
@@ -42,6 +48,26 @@ module.exports.info_patient = async (req, res) => {
     
     //   stream.pipe(res)
     // });
+  }catch(err){
+    res.status(401).json({error : "Patient not found !!"})
+  }
+};
+
+module.exports.pdf_patient = async (req, res) => {
+  const id = req.params.id;
+  try{
+    const patient = await Patient.findOne({ healthID : id });
+    pdf.create(pdfTemplate(patient), {}).toFile(`${__basedir}/documents/${patient.healthID}info.pdf`,(err) => {
+      if(err) {
+          console.log(err);
+          res.send(Promise.reject());
+          return;
+      }
+      res.download(`${__basedir}/documents/${patient.healthID}info.pdf`);
+      setTimeout(()=>{
+        fs.unlinkSync(`${__basedir}/documents/${id}info.pdf`);
+      },1000);
+    });
   }catch(err){
     res.status(401).json({error : "Patient not found !!"})
   }

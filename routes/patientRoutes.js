@@ -2,7 +2,8 @@ const { Router } = require("express");
 const {
   preview_prescription,
   get_patient,
-  info_patient
+  info_patient,
+  pdf_patient
 } = require("../controllers/patientControllers");
 const { requirePatientAuth } = require("../middlewares/patientAuthMiddleware");
 const router = Router();
@@ -10,5 +11,6 @@ const router = Router();
 router.get("/prescription/:id", requirePatientAuth, preview_prescription);
 router.get("/getpatient", requirePatientAuth, get_patient);
 router.get("/patient/info/:id", info_patient);
+router.get("/patient/pdf/:id", pdf_patient);
 
 module.exports = router;
