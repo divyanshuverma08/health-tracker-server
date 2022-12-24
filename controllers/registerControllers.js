@@ -62,8 +62,8 @@ module.exports.patient_register = async (req, res) => {
       contactPerson,
     });
     const token = createToken(patient._id);
-    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(200).json({ patient });
+    // res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.status(200).json({ patient, token });
   } catch (err) {
     const errors = handleError(err);
     res.status(404).json({ errors });
@@ -72,17 +72,23 @@ module.exports.patient_register = async (req, res) => {
 
 module.exports.patient_login = async (req, res) => {
   const { healthID,emailID, password } = req.body;
-  var username;
+  var body;
   if(emailID === undefined){
-    username = healthID;
+    body = {
+      healthID,
+      password
+    };
   }else{
-     username = emailID;
+     body = {
+      emailID,
+      password
+    };
   }
   try {
-    const patient = await Patient.login(username, password);
+    const patient = await Patient.login(body);
     const token = createToken(patient._id);
-    res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
-    res.status(200).json({ patient });
+    // res.cookie("jwt", token, { httpOnly: true, maxAge: maxAge * 1000 });
+    res.status(200).json({ patient ,token});
   } catch (err) {
     const errors = handleError(err);
     res.status(404).json({ errors });

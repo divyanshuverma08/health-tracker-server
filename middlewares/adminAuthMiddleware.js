@@ -2,8 +2,9 @@ const jwt = require("jsonwebtoken");
 const Admin = require("../models/admin");
 
 const requireAdminAuth = (req, res, next) => {
-  const token = req.cookies.jwt;
-  if (token) {
+  const {authorization} = req.headers;
+  if (authorization) {
+    const token=authorization.replace("Bearer ","");
     jwt.verify(token, process.env.SECRET_KEY, async (err, decodedToken) => {
       if (err) {
         let AuthError = { error: "Admin is not authenticated!" };

@@ -132,13 +132,18 @@ patientSchema.pre("save", async function (next) {
   next();
 });
 
-patientSchema.statics.login = async function (username, password) {
-  const patient = await this.findOne({ username });
-  if (!username) {
+patientSchema.statics.login = async function (body) {
+  var patient;
+  if(body.emailID === undefined){
+    patient = await this.findOne({ healthID: body.healthID });
+  }else{
+    patient = await this.findOne({ email: body.emailID });
+  }
+  if (body.emailID === undefined && body.healthID === undefined) {
     throw Error("Please enter HealthId or Email");
   }
   if (patient) {
-    const auth = await bcrypt.compare(password, patient.password);
+    const auth = await bcrypt.compare(body.password, patient.password);
     if (auth) {
       return patient;
     }
