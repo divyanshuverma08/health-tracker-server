@@ -1,5 +1,8 @@
 module.exports = (patient) => {
-    const today = new Date();
+    const date = new Date(patient.dob);
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
 return `
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +39,7 @@ return `
             <br>
             <div>
                 <label><strong>DOB : </strong></label>
-                <label>${patient.dob}</label>
+                <label>${day}/${month}/${year}</label>
             </div>
             <br>
             <div>
