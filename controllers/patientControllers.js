@@ -1,11 +1,5 @@
 const Patient = require("../models/patient");
-const pdf = require('html-pdf');
-const util = require('util'),
-    request = util.promisify(require('request')),
-    fs = require('fs'),
-    fsp = fs.promises;
 const htmlFile = require("../documents/index");
-const pdfTemplate = require('../documents');
 
 module.exports.preview_prescription = async (req, res) => {
   const id = req.params.id;
