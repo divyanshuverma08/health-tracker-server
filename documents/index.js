@@ -1,9 +1,16 @@
 module.exports = (patient) => {
-    const date = new Date(patient.dob);
-    const day = date.getDate();
-    const month = date.getMonth() + 1;
-    const year = date.getFullYear();
-return `
+  const date = new Date(patient.dob);
+  const day = date.getDate();
+  const month = date.getMonth() + 1;
+  const year = date.getFullYear();
+
+  const diseases = patient.diseases.map((item) => {
+    return `<div>
+        <label>${item.disease}</label>
+        <label>(${item.yrs} yrs)</label>
+    </div>`;
+  });
+  return `
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,10 +79,7 @@ return `
             <br>
             <div>
                 <h2>Disease : </h2>
-                <div>
-                    <label>${patient.diseases[0].disease}</label>
-                    <label>(${patient.diseases[0].yrs} yrs)</label>
-                </div>
+                ${diseases}
             </div>
             <div>
                 <h2>Contact Person : </h2>

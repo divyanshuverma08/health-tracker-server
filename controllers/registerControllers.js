@@ -6,7 +6,7 @@ const handleError = (err) => {
   let errors = {};
 
   // incorrect email
-  if (err.message === "Invalid HealthID") {
+  if (err.message === "Invalid HealthID or Email") {
     errors.healthID = "That HealthID is not registered";
   }
 
